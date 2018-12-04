@@ -1,0 +1,17 @@
+#class="necessity"
+een (must|voorwaarde|vereiste)
+essentieel
+(onvervangbaar|onontbeerlijk)
+noodzakelijk
+(@ZIJN) (een )?(noodzaak|vereiste|een vereiste|noodzakelijk)
+nodig
+verplicht
+(eis|vereiste|voorwaarde)
+kan niet (zijn )?zonder
+(moet|moeten|eis)
+(hadden|had|konden|kon) beter
+nodig hebben
+(behoort te|zou moeten)
+(zou|zouden)
+(@OND) beter
+(noodzaken|noodzakelijk|dwingen|noodzakelijk maken)

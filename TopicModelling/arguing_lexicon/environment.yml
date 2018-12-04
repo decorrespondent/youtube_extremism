@@ -1,0 +1,21 @@
+name: ml
+channels:
+  - defaults
+dependencies:
+  - ipython
+  - jupyter_client
+  - jupyter_core
+  - nb_conda
+  - nb_conda_kernels
+  - notebook
+  - python=3.6.6
+  - pip:
+    - autopep8==1.4
+    - ipdb==0.10.3
+    - jupyter==1.0.0
+    - jupyter-console==5.1.0
+    - numpy==1.14.2
+    - pandas==0.19.2
+    - spacy==2.0.11
+    - spacy-arguing-lexicon==0.0.2
+

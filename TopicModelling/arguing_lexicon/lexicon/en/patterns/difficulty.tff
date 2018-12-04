@@ -1,0 +1,18 @@
+#class="difficulty"
+(@BE) (@INTENSADV1)?easy
+(@BE) a (@INTENSADJ1)?breeze
+(@BE) a (@INTENSADJ1)?walk in the park
+(@BE) a (@INTENSADJ1)?piece of cake
+(@BE) a (@INTENSADJ1)?snap
+(@BE) a (@INTENSADJ1)?cinch
+(@BE) (@INTENSADJ1)?child's play
+(@BE) (@INTENSADV1)?difficult
+(@BE) a (@INTENSADJ1)?pain
+(@BE) a (@INTENSADJ1)?pain in the (butt|neck|ass)
+(@BE) a (@INTENSADJ1)?(bitch|bastard) to
+(@BE) no picnic
+(@BE) (@INTENSADV1)?tricky
+(@BE) (@INTENSADV1)?arduous
+(@BE) a (@INTENSADJ1)?challenge
+(@BE) (@INTENSADV1)?challenging
+(@HAVE) a (@INTENSADV1)?(hard|difficult) time

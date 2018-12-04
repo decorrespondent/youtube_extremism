@@ -1,0 +1,34 @@
+#class="assessments"
+(onze|ons|mijn) (mening|idee|inzicht) (is|was) dat
+het (is|was) (mijn|onze|ons) (mening|idee|inzicht) (dat)?
+naar (onze|mijn|ons) (mening|idee)
+(vanuit)? (ons|mijn) standpunt
+het (lijkt|leek) (ons|mij) (dat)?
+het (lijkt|leek) (dat)?
+het oogt alsof
+het komt op (ons|mij) over
+het zou (ons|mij) lijken
+het lijkt (ons|mij)
+het lijkt (erop)?
+(het|mijn|ons)([\w]+[ ])?punt is (dat)?
+(het|mijn|ons)([\w]+[ \,]*){1,2}  punt is (dat)?
+het (lijkt|leek) (mij|ons) (dat|alsof)
+het (lijkt|leek) (alsof|dat|net alsof)
+(we|wij|ik)(hebben|heb|krijgen|krijg|hadden|had|kregen|kreeg) (het idee|het gevoel|de indruk|de impressie) (dat)?
+(onze|mijn|ons) (indruk|idee|impressie|gevoel) (was|is) (dat)?
+volgens (onze|mijn) normen
+in (onze|mijn) ogen
+mijns? inziens
+naar (ons|onze|mijn) (idee|mening)
+voor zo ver (het)? (mij|ons) (aangaat|betreft)
+wat (mij|ons) betreft
+als je het (mij|ons) vraagt
+(wij|we|ik) (hebben|heb) het gevoel (dat)?
+vanuit (mijn|ons|onze) (standpunt|oogpunt|visie)
+(we|wij|ik) (denken|denk) niet (dat)?
+het enige (wat|dat) (we|wij|ik) (zeggen|zeg|bedoelen|bedoel) is
+wat (we|wij|ik) (zeggen|zeg|bedoelen|bedoel) is
+(we|wij|ik) (zeggen|zeg) dat
+(we|wij|ik) (zeggen|zeg) niet dat
+wat (we|wij|ik) (proberen|probeer) te zeggen is
+wat (we|wij|ik) (bedoelen|bedoel) is (dat)?

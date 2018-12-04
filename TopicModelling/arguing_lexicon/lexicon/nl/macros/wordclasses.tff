@@ -1,0 +1,7 @@
+#class="wordclasses"
+#emo1=subjectief,relationeel, positief
+#emo2=subjectief,relationeel, negatief
+@EMO1V={adoreert, wilt, prefereert, houdt, geniet}
+@EMO1N={leuk, adoreren, willen, voorkeuren, houden van, genieten}
+@EMO2V={haten, niet leuk, niet de voorkeur, afkeuren}
+@EMO2N={haten, niet leuk, niet de voorkeur, afkeuren}

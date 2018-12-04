@@ -1,0 +1,8 @@
+#class="pronoun"
+@I={i, i\'m, i\'ve, i\'ll, i\'d,me}
+@YOU={you, you\'re, you\'ve, you\'ll, you\'d}
+@HE={he, he\'s, he\'ll, he\'d,him}
+@SHE={she, she\'s, she\'ll, she\'d,her}
+@WE={we, we\'re, we\'ll, we\'d, we\'ve,us}
+@THEY={they, they\'re, they\'ll, they\'d, they\'ve,them}
+@PRONSUBJ={i, you, he, she, it, we, they}

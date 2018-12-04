@@ -1,0 +1,8 @@
+#class="contrast"
+er (is|zijn) ([\w]+[ \,]*){1,4}  en er (is|zijn|dan is er)
+(dat|het) is een (heel)? andere? (probleem|zaak|vraag|issue)
+(dat |het )?is (heel |best wel |compleet |totaal |helemaal )?anders
+zijn (heel |best wel |compleet |totaal |helemaal )?anders
+(compleet|helemaal|heel) anders
+is een (aparte|andere kwestie|situatie)
+(dat |het )?is een (aparte|andere) (kwestie|situatie)

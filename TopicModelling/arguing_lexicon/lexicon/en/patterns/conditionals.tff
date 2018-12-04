@@ -1,0 +1,14 @@
+#class="conditionals"
+if (we|you) want to ([\w]+[ \,]+){1,7}(we|you) (need to|must|have to)
+(we|you) ([\w ,]+) (must|have to|need to) ([\w]+[ \,]+){1,7}if  (you|we) want to
+it would be ([\w]+[ \,]+){0,2}nice if
+wouldn\'t it be ([\w]+[ \,]+){0,2}nice if
+if ([\w]+[ \,]+){3,8} that would be ([\w]+[ \,]+){0,2}nice
+(cannot|will not|won\'t|can\'t) ([\w]+[ \,]+){1,7}(if|unless)
+(if|unless) ([\w]+[ \,]+){3,10}(cannot|will not|won\'t|can\'t)
+(need|needs|must|has to|have to) ([\w]+[ \,]+){3,10}(in order )to
+(in order )?to ([\w]+[ \,]+){3,10}(need|needs|must|has to|have to)
+as long as (we|you) ([\w]+[ \,]+){3,10}(will|can|able|should|[a-zA-Z]+\'ll)
+([a-zA-Z]\'ll|will|can|able|should) ([\w]+[ \,]+){3,10}as long as (we|you) 
+(you|he|we) better ([\w]+[ \,]+){3,10}or
+otherwise

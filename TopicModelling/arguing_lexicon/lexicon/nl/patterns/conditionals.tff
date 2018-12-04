@@ -1,0 +1,14 @@
+#class="conditionals"
+als (we|jij|je) (willen|wil)  ([\w]+[ \,]+){1,7} (moeten|moet|zullen|zal) (we|jij|je) (moeten)?
+(we|jij|je)([\w ,]+) (moeten|moet|zullen|zal) ([\w]+[ \,]+){1,7} als (we|jij|je) (willen|wil|wilt)
+het zou ([\w]+[ \,]+){0,2} (fijn|prettig) zijn
+zou het niet ([\w]+[ \,]+){0,2} (fijn|prettig) zijn
+(als|wanneer) ([\w]+[ \,]+){2,8} dat zou ([\w]+[ \,]+){0,2} (fijn|prettig) zijn
+(kan niet|zal niet)([\w]+[ \,]+){1,7} (als|tenzij|mits|behalve als)
+(als|tenzij|mits|behalve)([\w]+[ \,]+){2,10} (kan|zal) (het|dat|dit) niet
+(moet|moeten|zal moeten|moet hebben|zal moeten hebben) ([\w]+[ \,]+){3,10} om (te)?
+om te ([\w]+[ \,]+){3,10} (moet|moeten|zal moeten)
+zo lang als (we|jij|je) ([\w]+[ \,]+){3,10} (zullen|zal|kunnen|kan|in staat zijn tot|zouden|zou)
+(zal|zullen|zou|zouden|kan|kunnen|zou|zouden) in staat zijn tot ([\w]+[ \,]+){3,10} zo lang als (we|jij)
+(jij|jij|hij|we) (zou|zouden) beter ([\w]+[ \,]+){3,10}of
+anders dan

@@ -1,0 +1,8 @@
+#class="pronoun"
+@IK={ik, ik ben, ik heb, ik zal, mijn, me, mij} 
+@JIJ={jij, je, jij bent, je bent, jij hebt, je hebt, jij zal, je zal, jij zult, je zult, jouw}
+@HIJ={hij, hij is, hij heeft, hij zal, hem}
+@ZE={zij, ze, zij is, ze is, zij heeft, ze heeft, zij zal, ze zal, haar}
+@WE={we, wij, we zijn, wij zijn, we hebben, wij hebben, we zullen, wij zullen, ons}
+@ZIJ={zij, zij zijn, zij hebben, zij zullen, hun}
+@OND={ik, jij, je, hij, zij, het, we, wij, hen, hun}

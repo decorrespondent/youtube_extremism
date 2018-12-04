@@ -1,0 +1,43 @@
+#class="modals"
+@ZIJN={zijn, is, ben, waren, was}
+@ZIJNPER={hij is, ik ben, het is, zij is, ze is, zij zijn, we zijn, wij zijn, jij bent, je bent, dat is}
+@ZIJNNEG={zijn niet, is niet, was niet, waren niet, ben niet, is niet}
+@MISS={misschien, mogelijk, zou kunnen, kan, zouden, zou, zal, zullen}
+@MOG={mogelijk, misschien, mogelijkheid tot}
+@MOGNEG={mogelijk niet, misschien niet, geen mogelijkheid tot}
+@KAN={kan, kunnen, kon, konden, zou kunnen, zouden kunnen}
+@KANNEG={kan niet, kunnen niet, kon niet, konden niet}
+@KANHEB={kan hebben, kunnen hebben, kon hebben, konden hebben, zou kunnen hebben, zouden kunnen hebben}
+@KANHEBNEG={kan niet hebben, kunnen niet hebben, zal, niet hebben, heeft misschien niet, hebben misschien niet, zal misschien niet}
+
+@INSTAAT={in staat tot, niet in staat tot}
+@ISNIET={is niet}
+@ZOUPER={jij zou, hij zou, ik zou, het zou, zij zou, ze zou, zij zouden, wij zouden, we zouden, dat zou, dit zou}
+@HEBPER={ik heb, jij hebt, je hebt, zij heeft, hij heeft, we hebben, wij hebben, zij hebben, het heeft, dat heeft, dit heeft}
+@ZAL={zal, zouden}
+@ZALNEG={zal niet, zouden niet}
+@ZALPER={ik zal, jij zal, zij zal, ze zal, hij zal, dat zal, dit zal}
+@DURF={durven, durf}
+@DURFNEG={durven niet, durf niet}
+@HEB={hebben, heb, hebt, heeft, had}
+@HEBNEG={heeft niet, had niet, heb niet, hebt niet}
+@MOET={moet, moeten, zal moeten, zullen moeten}
+@HEEFTNEG={heeft geen, heeft niet, hebben geen, hebben niet, hoeft niet, hoeven niet}
+@MOETPER={het moet, het zal moeten, hij moet, hij zal moeten, zij moet, zij zal moeten, ik moet, ik zal moeten, we moeten, we zullen moeten, zij moeten, zij zullen moeten, jij moet, je moet, jij zal moeten, je zal moeten, dat moet, dat zal moeten, dit moet, dit zal moeten}
+
+@MOETNEG={moet niet, moeten niet}
+@ZALMOET={zal moeten}
+@MOETNEGHEB={moet niet hebben, moeten niet hebben, zal niet moeten hebben}
+@WAS={was, vroeger, in het verleden}
+
+@MOETHEB={moet hebben, moeten hebben}
+
+@ZOUMOET={zou moeten}
+@ZOUNEGMOET={zou niet moeten}
+@ZOUMOETHEB={zou moeten hebben}
+@DOE={doe, doen, doet}
+@DOENEG={doet niet, doen niet, doet het niet, doen het niet}
+@GA={ga, gaat, gaan, zal gaan, zullen gaan}
+@GANEG={ga niet, gaat niet, gaan niet, zal niet gaan, zullen niet gaan}
+@GAPER={ik ga, zij gaan, zij gaat, het gaat, we gaan, jij|je gaat, het gaat, dat gaat}
+@GANEGPER={ik ga niet, zij gaan niet, zij gaat niet, het gaat niet, we gaan niet, jij|je gaat niet, het gaat niet, dat gaat niet}

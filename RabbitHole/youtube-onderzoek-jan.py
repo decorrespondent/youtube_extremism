@@ -1,0 +1,490 @@
+__author__ = 'Guillaume Chaslot'
+
+"""
+    This scripts starts from a search query on youtube and:
+        1) gets the N first search results
+        2) follows the first M recommendations
+        3) repeats step (2) P times
+        4) stores the results in a json file
+"""
+
+import urllib2
+import requests
+import cookielib
+from cookielib import MozillaCookieJar
+import re
+import json
+import sys
+import time
+import ssl
+import os
+import easygui
+import shutil
+
+
+from bs4 import BeautifulSoup
+
+RECOMMENDATIONS_PER_VIDEO = 1
+RESULTS_PER_SEARCH = 1
+
+# NUMBER OF MIN LIKES ON A VIDEO TO COMPUTE A LIKE RATIO
+MIN_LIKES_FOR_LIKE_RATIO = 5
+
+
+# Google session class by stackoverflow user alexislg
+class SessionGoogle:
+    def __init__(self):
+        self.ses = requests.session()
+        self.ses.cookies = MozillaCookieJar('cookie.txt')
+        self.user = None
+        if not os.path.exists('cookie.txt'):
+            if easygui.ynbox('Het bestand *cookie.txt* is niet gevonden. Wil je inloggen bij Google?', 'youtube-folower', ('Ja', 'Nee')):
+                self.user = self.login()
+        else:    
+            with open('cookie.txt', 'r') as cf:
+                self.rawcookie = cf.read()
+                if (self.rawcookie == ''):
+                    if easygui.ynbox('Het bestand *cookie.txt* is leeg. Wil je inloggen bij Google?', 'youtube-folower', ('Ja', 'Nee')):
+                        self.user = self.login()
+                else: 
+                    self.ses.cookies.load(ignore_discard = True, ignore_expires = True)
+                    self.user = self.check_login()
+                    if self.user == None:
+                        if easygui.ynbox('Het bestand *cookie.txt* is gevonden, maar geeft geen ingelogde gebruiker. Wil je inloggen bij Google?', 'youtube-folower', ('Ja', 'Nee')):
+                            self.user = self.login()
+
+        if self.user == None:
+            print 'Nog logged in. Continuing anonymously.'
+        else:
+            print 'Logged in as: %s.' % self.user         
+                
+        self.save_cookie()
+
+    def get(self, URL):
+        return self.ses.get(URL).content
+
+    def save_cookie(self):
+        cj = self.ses.cookies
+        cj.save(ignore_discard = True, ignore_expires = True)            
+
+    def login(self):
+        while True:
+            msg = "Vul de gegevens van je Google-account in:"
+            title = "youtube-follower"
+            fieldNames = ["Gebruikersnaam","Wachtwoord"]
+            fieldValues = []  # we start with blanks for the values
+            fieldValues = easygui.multpasswordbox(msg, title, fieldNames)
+
+            while True:
+                if fieldValues == None: break
+                errmsg = ""
+                for i in range(len(fieldNames)):
+                  if fieldValues[i].strip() == "":
+                    errmsg = errmsg + ('"%s" niet ingevuld.\n\n' % fieldNames[i])
+                if errmsg == "": break # no problems found
+                fieldValues = easygui.multpasswordbox(errmsg, title, fieldNames, fieldValues)
+
+            login_html = self.ses.get('https://accounts.google.com/ServiceLogin')
+            soup_login = BeautifulSoup(login_html.content).find('form').find_all('input')
+            my_dict = {}
+            for u in soup_login:
+                if u.has_attr('value'):
+                    my_dict[u['name']] = u['value']
+            # override the inputs without login and pwd:
+            print my_dict
+            my_dict['Email'] = fieldValues[0]
+            my_dict['Passwd'] = fieldValues[1]
+            self.ses.post('https://accounts.google.com/ServiceLoginAuth', data=my_dict)
+
+            m = self.check_login()
+            if m == None:
+                if easygui.ynbox('Inloggen mislukt. Wil je het opnieuw proberen?', 'youtube-folower', ('Ja', 'Nee')):
+                    continue
+                else:
+                    return m 
+            else: 
+                return m 
+
+    def check_login(self):
+        r = self.get('https://accounts.google.com/ServiceLogin')
+        m = re.search(r'Google Account: (.*?)  \&\#10', r)
+        if m == None:
+            return m
+        else:
+            return m.group(1)
+
+class YoutubeFollower():
+    def __init__(self, session, verbose=False, name='', alltime=True, gl=None, language=None, recent=False, loopok=True):
+        # Name
+        self._name = name
+        self._alltime = alltime
+        self._verbose = verbose
+
+        # Dict video_id to {'likes': ,
+        #                   'dislikes': ,
+        #                   'views': ,
+        #                   'recommendations': []}
+        self._video_infos = {} # self.try_to_load_video_infos()
+
+        # Dict search terms to [video_ids]
+        self._search_infos = {}
+        self._gl = gl
+        self._language = language
+        self._recent=recent
+        self._loopok=loopok
+        self._session=session
+
+        print ('Location = ' + repr(self._gl) + ' Language = ' + repr(self._language))
+
+    def clean_count(self, text_count):
+        # Ignore non ascii
+        ascii_count = text_count.encode('ascii', 'ignore')
+        # Ignore non numbers
+        p = re.compile('[\d,]+')
+        return int(p.findall(ascii_count)[0].replace(',', ''))
+
+    def get_search_results(self, search_terms, max_results, top_rated=False):
+        assert max_results < 20, 'max_results was not implemented to be > 20'
+
+        if self._verbose:
+            print ('Searching for {}'.format(search_terms))
+
+        # Trying to get results from cache
+        if search_terms in self._search_infos and len(self._search_infos[search_terms]) >= max_results:
+            return self._search_infos[search_terms][0:max_results]
+
+        # Escaping search terms for youtube
+        escaped_search_terms = urllib2.quote(search_terms.encode('utf-8'))
+
+        # We only want search results that are videos, filtered by viewcoung.
+        #  This is achieved by using the youtube URI parameter: sp=CAMSAhAB
+        if self._alltime:
+            filter = "CAMSAhAB"
+        else:
+            if top_rated:
+                filter = "CAE%253D"
+            else:
+                filter = "EgIQAQ%253D%253D"
+
+        url = "https://www.youtube.com/results?sp=" + filter + "&q=" + escaped_search_terms
+        if self._gl:
+            url = url + '&gl=' + self._gl
+
+        print ('Searching URL: ' + url)
+
+        html = self._session.get(url)
+        soup = BeautifulSoup(html, "html.parser")
+
+        videos = []
+        for item_section in soup.findAll('div', {'class': 'yt-lockup-dismissable'}):
+            video = item_section.contents[0].contents[0]['href'].split('=')[1]
+            videos.append(video)
+
+        self._search_infos[search_terms] = videos
+        return videos[0:max_results]
+
+    def get_recommendations(self, video_id, nb_recos_wanted, depth, key):
+        if video_id in self._video_infos:
+            # Updating the depth if this video was seen.
+            #self._video_infos[video_id]['depth'] = min(self._video_infos[video_id]['depth'], depth)
+            #print ('a video was seen at a lower depth')
+
+            video = self._video_infos[video_id]
+            recos_returned = []
+            for reco in video['recommendations']:
+                # This line avoids to loop around the same videos:
+                if reco not in self._video_infos or self._loopok:
+                    recos_returned.append(reco)
+                    if len(recos_returned) >= nb_recos_wanted:
+                        break
+            if self._loopok:
+                video['key'].append(key)
+            print ('\n Following recommendations ' + repr(recos_returned) + '\n')
+            return recos_returned
+
+        url = "https://www.youtube.com/watch?v=" + video_id
+
+        while True:
+            try:
+                html = urllib2.urlopen(url)
+                break
+            except urllib2.URLError:
+                print 'error'
+                time.sleep(1)
+        soup = BeautifulSoup(html, "html.parser")
+
+        # Views
+        views = -1
+        for watch_count in soup.findAll('div', {'class': 'watch-view-count'}):
+            try:
+                views = self.clean_count(watch_count.contents[0])
+            except IndexError:
+                pass
+
+        # Likes
+        likes = -1
+        for like_count in soup.findAll('button', {'class': 'like-button-renderer-like-button'}):
+            try:
+                likes = self.clean_count(like_count.contents[0].text)
+            except IndexError:
+                pass
+
+        # Dislikes
+        dislikes = -1
+        for like_count in soup.findAll('button', {'class': 'like-button-renderer-dislike-button'}):
+            try:
+                dislikes = self.clean_count(like_count.contents[0].text)
+            except IndexError:
+                pass
+
+        # Channel
+        channel = ''
+        for item_section in soup.findAll('a', {'class': 'yt-uix-sessionlink'}):
+            if item_section['href'] and '/channel/' in item_section['href'] and item_section.contents[0] != '\n':
+                channel = item_section.contents[0]
+                channel_id = item_section['href'].split('/channel/')[1]
+                break
+
+        if channel == '':
+            print ('WARNING: CHANNEL not found')
+
+        # Recommendations
+        recos = []
+        upnext = True
+        for video_list in soup.findAll('ul', {'class': 'video-list'}):
+            if upnext:
+                # Up Next recommendation
+                try:
+                    recos.append(video_list.contents[1].contents[1].contents[1]['href'].replace('/watch?v=', ''))
+                except IndexError:
+                    print ('WARNING Could not get a up next recommendation because of malformed content')
+                    pass
+                upnext = False
+            else:
+                # 19 Others
+                for i in range(1, 19):
+                    try:
+                        recos.append(video_list.contents[i].contents[1].contents[1]['href'].replace('/watch?v=', ''))
+                    except IndexError:
+                        if self._verbose:
+                            print ('Could not get a recommendation because there are not enough')
+                    except AttributeError:
+                        if self._verbose:
+                            print ('WARNING Could not get a recommendation because of malformed content')
+
+        title = ''
+        for eow_title in soup.findAll('span', {'id': 'eow-title'}):
+            title = eow_title.text.strip()
+
+        if title == '':
+            print ('WARNING: title not found')
+
+        if video_id not in self._video_infos:
+            self._video_infos[video_id] = {'views': views,
+                                           'likes': likes,
+                                           'dislikes': dislikes,
+                                           'recommendations': recos,
+                                           'title': title,
+                                           'depth': depth,
+                                           'id': video_id,
+                                           'channel': channel,
+                                           'key': []}
+            if self._loopok:
+                self._video_infos[video_id]['key'].append(key)
+
+        video = self._video_infos[video_id]
+        print (repr(video_id + ': ' + video['title'] + ' [' + channel + ']{' + repr(key) +'} ' + str(video['views']) + ' views , depth: ' + str(video['depth'])))
+        # print (repr(video['recommendations']))
+        return recos[:nb_recos_wanted]
+
+    def get_n_recommendations(self, seed, branching, depth, key):
+        if depth is 0:
+            return [seed]
+        current_video = seed
+        all_recos = [seed]
+        index = 0
+        for video in self.get_recommendations(current_video, branching, depth, key):
+            code = chr(index + 97)
+            all_recos.extend(self.get_n_recommendations(video, branching, depth - 1, key + code))
+            index = index + 1
+        return all_recos
+
+    def compute_all_recommendations_from_search(self, search_terms, search_results, branching, depth):
+        search_results = self.get_search_results(search_terms, search_results)
+        print ('Search results ' + repr(search_results))
+
+        all_recos = []
+        ind = 0
+        for video in search_results:
+            ind += 1
+            all_recos.extend(self.get_n_recommendations(video, branching, depth, str(ind)))
+            print ('\n\n\nNext search: ')
+        all_recos.extend(search_results)
+        return all_recos
+
+    def count(self, iterator):
+        counts = {}
+        for video in iterator:
+            counts[video] = counts.get(video, 0) + 1
+        return counts
+
+    def go_deeper_from(self, search_term, search_results, branching, depth):
+        all_recos = self.compute_all_recommendations_from_search(search_term, search_results, branching, depth)
+        counts = self.count(all_recos)
+        print ('\n\n\nSearch term = ' + search_term + '\n')
+        print ('counts: ' + repr(counts))
+        sorted_videos = sorted(counts, key=counts.get, reverse=True)
+        return sorted_videos, counts
+
+    def save_video_infos(self, keyword):
+        print ('Wrote file:')
+        date = time.strftime('%Y%m%d')
+        with open('data/video-infos-' + keyword + '-' + date + '.json', 'w') as fp:
+            json.dump(self._video_infos, fp)
+
+    def try_to_load_video_infos(self):
+        try:
+            with open('data/video-infos-' + self._name + '.json', 'r') as fp:
+                return json.load(fp)
+        except Exception as e:
+            print ('Failed to load from graph ' + repr(e))
+            return {}
+
+    def count_recommendation_links(self):
+        counts = {}
+        for video_id in self._video_infos:
+            for reco in self._video_infos[video_id]['recommendations']:
+                counts[reco] = counts.get(reco, 0) + 1
+        return counts
+
+    def like_ratio_is_computed(self, video):
+        return int(video['likes']) > MIN_LIKES_FOR_LIKE_RATIO
+
+    def print_graph(self, links_per_video, only_mature_videos=True):
+        """
+            Prints a file with a graph containing all videos.
+        """
+        input_links_counts = self.count_recommendation_links()
+        graph = {}
+        nodes = []
+        links = []
+        for video_id in self._video_infos:
+            video = self._video_infos[video_id]
+            if self.like_ratio_is_computed(video):
+                popularity = 0
+            else:
+                popularity = video['likes'] / float(video['likes'] + video['dislikes'])
+
+            nodes.append({'id': video_id, 'size': input_links_counts.get(video_id, 0), 'popularity': popularity, 'type': 'circle', 'likes': video['likes'], 'dislikes': video['dislikes'], 'views': video['views'], 'depth': video['depth']})
+            link = 0
+            for reco in self._video_infos[video_id]['recommendations']:
+                if reco in self._video_infos:
+                    links.append({'source': video_id, 'target': reco, 'value': 1})
+                    link += 1
+                    if link >= links_per_video:
+                        break
+        graph['nodes'] = nodes
+        graph['links'] = links
+        with open('./graph-' + self._name + '.json', 'w') as fp:
+            json.dump(graph, fp)
+        date = time.strftime('%Y-%m-%d')
+        with open('./graph-' + self._name + '-' + date + '.json', 'w') as fp:
+            json.dump(graph, fp)
+        print ('Wrote graph as: ' + './graph-' + self._name + '-' + date + '.json')
+
+
+    def print_videos(self, videos, counts, max_length):
+        idx = 1
+        for video in videos[:max_length]:
+            try:
+                current_title = self._video_infos[video]['title']
+                print (str(idx) + ') Recommended ' + str(counts[video]) + ' times: '
+                    ' https://www.youtube.com/watch?v=' + video + ' , Title: ' + repr(current_title))
+                if idx % 20 == 0:
+                    print ('')
+                idx += 1
+            except KeyError:
+                pass
+
+    def get_top_videos(self, videos, counts, max_length_count):
+        video_infos = []
+        for video in videos:
+            try:
+                video_infos.append(self._video_infos[video])
+                video_infos[-1]['nb_recommendations'] = counts[video]
+            except KeyError:
+                pass
+
+        # Computing the average recommendations of the video:
+        # The average is computing only on the top videos, so it is an underestimation of the actual average.
+        if video_infos is []:
+            return []
+        sum_recos = 0
+        for video in video_infos:
+            sum_recos += video['nb_recommendations']
+        avg = sum_recos / float(len(video_infos))
+        for video in video_infos:
+            video['mult'] = video['nb_recommendations'] / avg
+        return video_infos[:max_length_count]
+
+def compare_keywords(session, query, search_results, branching, depth, name, gl, language, recent, loopok):
+    date = time.strftime('%Y-%m-%d')
+    file_name = 'results/' + name + '-' + date + '.json'
+    print ('Running, will save the resulting json to:' + file_name)
+    top_videos = {}
+    for keyword in query.split(','):
+        yf = YoutubeFollower(session, verbose=True, name=keyword, alltime=False, gl=gl, language=language, recent=recent, loopok=loopok)
+        top_recommended, counts = yf.go_deeper_from(keyword,
+                          search_results=search_results,
+                          branching=branching,
+                          depth=depth)
+        top_videos[keyword] = yf.get_top_videos(top_recommended, counts, 1000)
+        yf.print_videos(top_recommended, counts, 50)
+        yf.save_video_infos(name + '-' + keyword)
+
+    with open(file_name, 'w') as fp:
+        json.dump(top_videos, fp)
+
+def main():
+    query    = 'jared taylor'
+    name     = "taylor"
+    searches = 2
+    branch   = 2
+    depth    = 10
+    
+    #Create (authenticated) Google session and log in to YouTube
+    session = SessionGoogle()
+    session.get('https://accounts.google.com/ServiceLogin?continue=https://youtube.com&service=youtube')
+
+
+    #file = codecs.open("test.txt","w+", encoding = 'utf-8')
+    #file.write('Met login testin\'')
+    #file.write(session.get('https://accounts.google.com/ServiceLogin?continue=https://youtube.com&service=youtube'))
+
+
+    #Seasygui.msgbox("Dank je wel voor meewerken aan dit onderzoek! De app zal een ongeveer een half uur nodig hebben om alle resultaten te verzamelen. Als we klaar zijn krijg je nogmaals een venster als deze te zien en staan de resultaten op dezelfde plek als waar je dit script hebt bewaard en aangeklikt.", title="DeCorrespondent Youtube Onderzoek")
+
+    #os.chdir('')
+    if not os.path.exists('results'):
+        os.mkdir('results')
+        print 'made results'
+    if not os.path.exists('data'):
+        os.mkdir('data')
+
+    compare_keywords(session, query, searches, branch, depth, name, 'NL', 'NL', False, False)
+
+    if os.path.exists('data'):
+        shutil.rmtree('data', ignore_errors=True)
+
+    file_name = name + '-' + time.strftime('%Y-%m-%d') + '.json'
+
+    if os.path.exists('results/'+file_name):
+        shutil.copyfile('results/'+file_name, file_name)
+        shutil.rmtree('results')
+
+    #easygui.msgbox("We zijn klaar. Dank je wel :)", title="DeCorrespondent Youtube Onderzoek")
+
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

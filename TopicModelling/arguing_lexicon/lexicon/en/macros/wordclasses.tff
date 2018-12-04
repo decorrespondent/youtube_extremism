@@ -1,0 +1,7 @@
+#class="wordclasses"
+#emo1=stative, relational, positive
+#emo2=stative, relational, negative
+@EMO1V={like, adore, want, prefer, love, enjoy}
+@EMO1N={like, adoration, want, preference, love, enjoyment}
+@EMO2V={hate, dislike, disprefer}
+@EMO2N={hate, dislike, dispreference}
