@@ -91,10 +91,7 @@ def convert_to_comments(response):
 
 def write_comments(comments_file, comments):
     with open(comments_file, 'a') as csv_file:
-        writer = _csv.DictWriter(csv_file, fieldnames=_get_comment_header(), 
-                                 delimiter ='¶',
-                                 quotechar ='þ',
-                                 )
+        writer = _csv.DictWriter(csv_file, fieldnames=_get_comment_header())
         if _is_empty_file(comments_file):
             writer.writeheader()
 

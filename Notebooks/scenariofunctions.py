@@ -78,6 +78,10 @@ def channel_filter(dataframe, selection):
      print('deze selectie levert ' + str(len(filtered_data)) + ' videos op.')
      return filtered_data
 
+def channel_filter_exclude(dataframe, selection):
+     filtered_data = dataframe[~dataframe['video_channel_title'].isin(selection)]
+     print('deze selectie levert ' + str(len(filtered_data)) + ' videos op.')
+     return filtered_data
 
 def add_years_months_to_videos(dataframe):
      dataframe.loc[:,('year')] = pd.to_datetime(dataframe.loc[:,('video_published')]).dt.to_period('Y')
@@ -92,7 +96,7 @@ def plot_views_per_year(dataframe):
      width = 0.4
      ax = fig.add_subplot(111) 
      views_per_year.plot(kind='bar', color='red', width=width, grid=True)
-     ax.set_ylabel('number of videos published')
+     ax.set_ylabel('number of views')
      ax.set_xlabel('year')
 
      return plt.show()
@@ -114,7 +118,7 @@ def plot_users(dataframe):
      width = 0.4
      ax = fig.add_subplot(111) 
      top_users.plot(kind='bar', color='red', width=width, grid=True)
-     ax.set_ylabel('number of videos published')
+     ax.set_ylabel('number of comments')
      ax.set_xlabel('channels')
      
      return  plt.show()
@@ -194,6 +198,50 @@ def get_comments_by_author(query, sphere):
                         quotechar='þ',
                         engine='python')
      result = pd.concat([chunk[chunk['author_channel_id'].isin(query)] for chunk in iter_csv])
+     result['sphere'] = sphere
+     result.loc[:,('year')] = pd.to_datetime(result.loc[:,('comment_time')]).dt.to_period('Y')
+     result = result[['video_id', 'comment_id', 'author_display_name', 'author_channel_id', 'comment_text', 'comment_time', 'year', 'sphere']]
+     print('found ' + str(len(result)) + ' comments \n and ' + str(result.author_channel_id.nunique()) + ' unique commenters')
+     return result
+
+def get_comments_by_author_name(query, sphere):
+     if sphere == 'nl_right':
+          path = config.PATH_NL
+     if sphere == 'left':
+          path = config.PATH_LEFT
+     elif sphere == 'right':
+          path = config.PATH_RIGHT
+     else:
+          print('sphere not found \n please try again')
+
+     iter_csv = pd.read_csv(path + 'comments_' + sphere + '.csv', 
+                        chunksize=1000000, 
+                        sep='¶',
+                        quotechar='þ',
+                        engine='python')
+     result = pd.concat([chunk[chunk['author_display_name'].isin(query)] for chunk in iter_csv])
+     result['sphere'] = sphere
+     result.loc[:,('year')] = pd.to_datetime(result.loc[:,('comment_time')]).dt.to_period('Y')
+     result = result[['video_id', 'comment_id', 'author_display_name', 'author_channel_id', 'comment_text', 'comment_time', 'year', 'sphere']]
+     print('found ' + str(len(result)) + ' comments \n and ' + str(result.author_channel_id.nunique()) + ' unique commenters')
+     return result
+
+def get_comments_by_topic(query, sphere):
+     if sphere == 'nl_right':
+          path = config.PATH_NL
+     if sphere == 'left':
+          path = config.PATH_LEFT
+     elif sphere == 'right':
+          path = config.PATH_RIGHT
+     else:
+          print('sphere not found \nplease try again')
+
+     iter_csv = pd.read_csv(path + 'comments_' + sphere + '.csv', 
+                        chunksize=1000000, 
+                        sep='¶',
+                        quotechar='þ',
+                        engine='python')
+     result = pd.concat([chunk[chunk['comment_text'].astype(str).str.contains('{}'.format('|'.join([s for s in query])), na=False, case=False, regex=True)] for chunk in iter_csv])
      result['sphere'] = sphere
      result.loc[:,('year')] = pd.to_datetime(result.loc[:,('comment_time')]).dt.to_period('Y')
      result = result[['video_id', 'comment_id', 'author_display_name', 'author_channel_id', 'comment_text', 'comment_time', 'year', 'sphere']]

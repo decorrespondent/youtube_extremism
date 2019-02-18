@@ -18,15 +18,16 @@ You should now have a commandline that start like this:
 (correspondent_environment) $
 ```
 
+Now install all the required packages in this environment with
+```commandline
+(correspondent_environment) $ pip3 install -r requirements
+```
+
 To enable this environment to be used in a jupyter notebook add the kernel to the options
 ```commandline
 (correspondent_environment) $ ipython kernel install --name 'correspondent' --user
 ``` 
 
-Now install all the required packages in this environment with
-```commandline
-(correspondent_environment) $ pip3 install -r requirements
-```
 
 #### Step 2: Install the youtubecollector package
 
@@ -45,7 +46,13 @@ You will need a google account.
 The next step are described here: [google api setup documentation](https://support.google.com/googleapi/answer/6158862)
 
 #### Getting started
-To see an example of the complete pipeline check the `getting_started.ipynb`.
+To see an example of the complete pipeline check the `getting_started.ipynb`.  
+This notebook mkaes use of `tqdm` which generates some nice progress bars
+so you can track the progress. 
+To enable these visualisations run:
+```commandline
+(correspondent_environment) $ jupyter nbextension enable --py widgetsnbextension
+``` 
 
 #### Development note
 If you wish to work on the package install the package with the `--editable` flag.  

@@ -30,19 +30,6 @@ def _get_channel(channel_id, youtube_client):
         id=channel_id
     ).execute()
 
-def _get_topic_id(response_channel):
-    if "topicDetails" in response_channel:
-        return response_channel['topicDetails'].get('topicIds', 'not set')
-    else:
-        return "not set"
-    
-
-def _get_topic_categories(response_channel):
-    if "topicDetails" in response_channel:
-        return response_channel['topicDetails'].get('topicCategories', 'not set')
-    else:
-        return "not set"
-
 
 def _convert_to_channel(response) -> channel:
     """Extracts the needed variables from the returned json"""
@@ -57,8 +44,8 @@ def _convert_to_channel(response) -> channel:
                    channel_commentcount=response_channel['statistics']['commentCount'],
                    channel_subscribercount=response_channel['statistics']['subscriberCount'],
                    channel_videocount=response_channel['statistics']['videoCount'],
-                   channel_topic_ids=_get_topic_id(response_channel),
-                   channel_topic_categories=_get_topic_categories(response_channel),
+                   channel_topic_ids=response_channel['topicDetails'].get('topicIds', 'not set'),
+                   channel_topic_categories=response_channel['topicDetails'].get('topicCategories', 'not set'),
                    channel_branding_keywords=response_channel['brandingSettings']['channel'].get('keywords', 'not set')
                    )
 
