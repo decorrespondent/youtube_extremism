@@ -1,7 +1,0 @@
-README.md
-setup.py
-src/youtubecollector.egg-info/PKG-INFO
-src/youtubecollector.egg-info/SOURCES.txt
-src/youtubecollector.egg-info/dependency_links.txt
-src/youtubecollector.egg-info/requires.txt
-src/youtubecollector.egg-info/top_level.txt
