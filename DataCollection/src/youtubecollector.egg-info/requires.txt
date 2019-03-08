@@ -1,7 +1,0 @@
-pandas
-numpy
-youtube_dl
-google-api-python-client
-webvtt-py
-jupyter
-requests
