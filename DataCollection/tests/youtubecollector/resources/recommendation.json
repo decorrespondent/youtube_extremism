@@ -1,0 +1,78 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "some identifier",
+  "nextPageToken": "nextPageToken",
+  "regionCode": "NL",
+  "pageInfo": {
+    "totalResults": 330,
+    "resultsPerPage": 50
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/XMTNvc3BBTTBo2SWSuj2nscMDmw\"",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "id of first target video"
+      },
+      "snippet": {
+        "publishedAt": "2018-01-01T01:01:01.000Z",
+        "channelId": "channel Id of first video",
+        "title": "title of first video",
+        "description": "Description of first recommendation",
+        "thumbnails": {
+          "default": {
+            "url": "https://someimage.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://someimage.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://someimage.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Title of channel",
+        "liveBroadcastContent": "none"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "some identifier",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "id of second target video"
+      },
+      "snippet": {
+        "publishedAt": "2018-10-10T10:10:10.000Z",
+        "channelId": "channel id of second video",
+        "title": "title of second video",
+        "description": "description of second video",
+        "thumbnails": {
+          "default": {
+            "url": "https://image.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://image.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://image.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Title of second channel",
+        "liveBroadcastContent": "none"
+      }
+    }
+  ]
+}

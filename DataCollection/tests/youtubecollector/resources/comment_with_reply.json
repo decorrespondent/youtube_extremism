@@ -1,0 +1,69 @@
+{
+  "kind": "youtube#commentThreadListResponse",
+  "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/M13kILBSDXHZmf82KpKIUu78oro\"",
+  "pageInfo": {
+    "totalResults": 5,
+    "resultsPerPage": 100
+  },
+  "items": [
+    {
+      "kind": "youtube#commentThread",
+      "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/6WkG1Db9T-En4DWmNTTBdki5WTk\"",
+      "id": "The comment id that is used",
+      "snippet": {
+        "videoId": "the video id",
+        "topLevelComment": {
+          "kind": "youtube#comment",
+          "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/RUV3jLsQcA6PsDjkr3q5GkpAOmI\"",
+          "id": "this comment id is not used",
+          "snippet": {
+            "authorDisplayName": "Author name",
+            "authorProfileImageUrl": "somewhere.com/photo.jpg",
+            "authorChannelUrl": "http://www.youtube.com/channel/someone",
+            "authorChannelId": {
+              "value": "someone"
+            },
+            "videoId": "a video id",
+            "textDisplay": "The text that is displayed",
+            "textOriginal": "Would be amazing to see an Austin Petersen endorsement as well. He would stand right up there with Massie, Amash, and the rest of the liberty coalition in congress.",
+            "canRate": true,
+            "viewerRating": "none",
+            "likeCount": 4,
+            "disLikeCount": 2,
+            "publishedAt": "2017-11-02T19:25:12.000Z",
+            "updatedAt": "2017-11-02T19:25:12.000Z"
+          }
+        },
+        "canReply": true,
+        "totalReplyCount": 0,
+        "isPublic": true
+      },
+      "replies": {
+        "comments": [
+          {
+            "kind": "youtube#comment",
+            "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/TAYF2haOdXkzVaoBDUpJkoLXQSQ\"",
+            "id": "The parent id.the reply id",
+            "snippet": {
+              "authorDisplayName": "Responder",
+              "authorProfileImageUrl": "example2.com/photo.jpg",
+              "authorChannelUrl": "http://www.youtube.com/channel/responder",
+              "authorChannelId": {
+                "value": "responder channel id"
+              },
+              "videoId": "some video id",
+              "textDisplay": "The response text",
+              "textOriginal": "Different if something was changed",
+              "parentId": "the parent id",
+              "canRate": true,
+              "viewerRating": "none",
+              "likeCount": 1,
+              "publishedAt": "2017-11-02T19:55:27.000Z",
+              "updatedAt": "2017-11-02T19:55:27.000Z"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

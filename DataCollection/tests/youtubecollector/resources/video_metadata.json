@@ -1,0 +1,84 @@
+{
+  "kind": "youtube#videoListResponse",
+  "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/b7mZ8rGMG1BFDpd9jh6TQbAlDik\"",
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 1
+  },
+  "items": [
+    {
+      "kind": "youtube#video",
+      "etag": "etage",
+      "id": "HIjfgBATDfs",
+      "snippet": {
+        "publishedAt": "2008-10-18T18:42:29.000Z",
+        "channelId": "UC_0dwPeY0vQSJGVfRpFvGUg",
+        "title": "title in metadata",
+        "description": "Description in metadata",
+        "thumbnails": {
+          "default": {
+            "url": "https://image.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://image.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://image.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Channel title of metadata",
+        "tags": [
+          "tag one",
+          "tag two"
+        ],
+        "categoryId": "1",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Localized title of video in metadata",
+          "description": "localized Description in metadata"
+        }
+      },
+      "contentDetails": {
+        "duration": "PT3M3S",
+        "dimension": "2d",
+        "definition": "sd",
+        "caption": "false",
+        "licensedContent": false,
+        "regionRestriction": {
+          "blocked": [
+            "GP",
+            "DE",
+            "GB"
+          ]
+        },
+        "projection": "rectangular"
+      },
+      "statistics": {
+        "viewCount": "120",
+        "likeCount": "231",
+        "dislikeCount": "342",
+        "favoriteCount": "453",
+        "commentCount": "564"
+      },
+      "topicDetails": {
+        "topicIds": [
+          "topic Id"
+        ],
+        "relevantTopicIds": [
+          "Relevant topics ids 1",
+          "Relevant topics ids 2"
+        ],
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Television_program",
+          "https://en.wikipedia.org/wiki/Society"
+        ]
+      }
+    }
+  ]
+}

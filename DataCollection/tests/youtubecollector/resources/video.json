@@ -1,0 +1,60 @@
+{
+  "kind": "youtube#playlistItemListResponse",
+  "etag": "etag",
+  "prevPageToken": "token",
+  "pageInfo": {
+    "totalResults": 258,
+    "resultsPerPage": 50
+  },
+  "items": [
+    {
+      "kind": "youtube#playlistItem",
+      "etag": "Etag",
+      "id": "An id that isn't used",
+      "snippet": {
+        "publishedAt": "2015-01-01T01:01:01.000Z",
+        "channelId": "Id of the channel",
+        "title": "The title of the video",
+        "description": "Description of the video",
+        "thumbnails": {
+          "default": {
+            "url": "https://image.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https:image.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://image.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://image.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://image.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Title of the channel",
+        "playlistId": "id of playlist",
+        "position": 250,
+        "resourceId": {
+          "kind": "youtube#video",
+          "videoId": "video Id that isn't used"
+        }
+      },
+      "contentDetails": {
+        "videoId": "The id of the video",
+        "videoPublishedAt": "2015-01-01T10:01:10.000Z"
+      }
+    }
+  ]
+}
