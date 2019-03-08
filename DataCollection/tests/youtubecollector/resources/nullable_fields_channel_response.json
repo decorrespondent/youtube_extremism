@@ -1,0 +1,99 @@
+{
+  "kind": "youtube#channelListResponse",
+  "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/OeMJN9Cnx6jGn9D5tetafViyG0U\"",
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 1
+  },
+  "items": [
+    {
+      "kind": "youtube#channel",
+      "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/3t1aM54tFd_H-BQTFGM9M4ZNq1g\"",
+      "id": "Some_ID",
+      "snippet": {
+        "title": "The test channel",
+        "description": "The Official YouTube Channel for testing",
+        "publishedAt": "2015-04-03T17:02:57.000Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/a-/AAuE7mCD6Gw54_JFbHqq-6fIZynVB3B7grol7PQtYA=s88-mo-c-c0xffffffff-rj-k-no",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/a-/AAuE7mCD6Gw54_JFbHqq-6fIZynVB3B7grol7PQtYA=s240-mo-c-c0xffffffff-rj-k-no",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/a-/AAuE7mCD6Gw54_JFbHqq-6fIZynVB3B7grol7PQtYA=s800-mo-c-c0xffffffff-rj-k-no",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": {
+          "title": "Rand Paul",
+          "description": "The Official YouTube Channel of Rand Paul"
+        }
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "watchHistory": "HL",
+          "watchLater": "WL"
+        }
+      },
+      "statistics": {
+        "viewCount": "2640735",
+        "commentCount": "0",
+        "subscriberCount": "9779",
+        "hiddenSubscriberCount": false,
+        "videoCount": "258"
+      },
+      "topicDetails": {
+      },
+      "brandingSettings": {
+        "channel": {
+          "title": "Rand Paul",
+          "description": "The Official YouTube Channel of Rand Paul",
+          "defaultTab": "Featured",
+          "trackingAnalyticsAccountId": "UA-57201184-2",
+          "showRelatedChannels": true,
+          "showBrowseView": true,
+          "unsubscribedTrailer": "KJnn2oi8e7A",
+          "profileColor": "#000000",
+          "country": "US"
+        },
+        "image": {
+          "bannerImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w1060-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+          "bannerMobileImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w640-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+          "bannerTabletLowImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w1138-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+          "bannerTabletImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w1707-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+          "bannerTabletHdImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w2276-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+          "bannerTabletExtraHdImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w2560-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+          "bannerMobileLowImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w320-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+          "bannerMobileMediumHdImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w960-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+          "bannerMobileHdImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w1280-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+          "bannerMobileExtraHdImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w1440-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+          "bannerTvImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w2120-fcrop64=1,00000000ffffffff-nd-c0xffffffff-rj-k-no",
+          "bannerTvLowImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w854-fcrop64=1,00000000ffffffff-nd-c0xffffffff-rj-k-no",
+          "bannerTvMediumImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w1280-fcrop64=1,00000000ffffffff-nd-c0xffffffff-rj-k-no",
+          "bannerTvHighImageUrl": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w1920-fcrop64=1,00000000ffffffff-nd-c0xffffffff-rj-k-no"
+        },
+        "hints": [
+          {
+            "property": "channel.banner.mobile.medium.image.url",
+            "value": "https://yt3.ggpht.com/hywTtjeycRX2taWlatnyi1KqC-sVVmNS18aKETNxZQij9aIGeA05djEeihEH_J3hia65H7Vo=w640-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no"
+          },
+          {
+            "property": "channel.featured_tab.template.string",
+            "value": "Everything"
+          },
+          {
+            "property": "channel.modules.show_comments.bool",
+            "value": "True"
+          }
+        ]
+      }
+    }
+  ]
+}

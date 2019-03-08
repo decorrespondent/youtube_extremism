@@ -5,3 +5,8 @@ google-api-python-client
 webvtt-py
 jupyter
 requests
+matplotlib
+networkx
+seaborn
+tqdm
+docutils
