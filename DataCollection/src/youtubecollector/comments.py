@@ -71,9 +71,9 @@ def convert_to_comments(response):
                         )
         if 'replies' in data:
             for reply in data['replies']['comments']:
-                #Replies kunnen worden herkend aan de id:
-                # De id is opgebouwd uit twee elementen. {parent_comment_id}.{reply_id}
-                # TODO[Olaf]: Is het zinnig om een identifier voor replies mee te geven?
+                # Replies can be recognized by the format of their id:
+                # The id is made out of two elements: {parent_comment_id}.{reply_id}
+                # TODO[Olaf]: Do we want to add a boolean field if something is an reply
 
                 comments.append(comment(comment_id=reply['id'],
                                         video_id=reply['snippet']['videoId'],
