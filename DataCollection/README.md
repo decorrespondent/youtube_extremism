@@ -8,37 +8,41 @@ This will keep this module limited to this project and not part of your global i
 
 ```commandline
  $ pip3 install virtualenv
- $ virtualenv correspondent_environment
- $ source correspondent_environment/bin/activate
+ $ virtualenv venv
+ $ source venv/bin/activate
 ```
 
 You should now have a commandline that start like this:
 
 ```commandline
-(correspondent_environment) $
+(venv) $
 ```
-
-Now install all the required packages in this environment with
-```commandline
-(correspondent_environment) $ pip3 install -r requirements
-```
-
-To enable this environment to be used in a jupyter notebook add the kernel to the options
-```commandline
-(correspondent_environment) $ ipython kernel install --name 'correspondent' --user
-``` 
-
 
 #### Step 2: Install the youtubecollector package
 
+Now you can install the package
 ```commandline
-(correspondent_environment) $ pip3 install DataCollection
+(venv) $ make install
+```
+
+If you want to use this in a jupyter notebook (like notebooks/getting_started.ipynb)  
+you have to start the jupyter server from within the virtual env
+```bash
+(venv) $ jupyter notebook
 ```
 
 You can now import the module like any other package
 ```python
 import youtubecollector
 ```
+
+if this fails you could check if you have the right python kernel via
+```python
+import sys
+sys.executable
+```
+
+this should result in a path that ends in `venv/bin/python3.6`
 
 #### Step 3: Get a developer key for the api
 
@@ -47,16 +51,19 @@ The next step are described here: [google api setup documentation](https://suppo
 
 #### Getting started
 To see an example of the complete pipeline check the `getting_started.ipynb`.  
-This notebook mkaes use of `tqdm` which generates some nice progress bars
-so you can track the progress. 
+This notebook makes use of `tqdm` which generates some nice progress bars
+so you can track the progress.  
 To enable these visualisations run:
 ```commandline
-(correspondent_environment) $ jupyter nbextension enable --py widgetsnbextension
+(venv) $ jupyter nbextension enable --py widgetsnbextension
 ``` 
 
 #### Development note
-If you wish to work on the package install the package with the `--editable` flag.  
-In combination with the `autoreload` extension you can quickly test the package in a notebook
+If you wish to work on the package install the package with 
+```bash
+(venv) $ make development
+```
+In combination with the `autoreload` extension you can quickly test changes to the package in a notebook
 ```ipnbpython
 %load_ext autoreload
 %autoreload 2

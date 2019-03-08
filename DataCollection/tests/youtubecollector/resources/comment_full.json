@@ -1,0 +1,43 @@
+{
+  "kind": "youtube#commentThreadListResponse",
+  "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/M13kILBSDXHZmf82KpKIUu78oro\"",
+  "pageInfo": {
+    "totalResults": 5,
+    "resultsPerPage": 100
+  },
+  "items": [
+    {
+      "kind": "youtube#commentThread",
+      "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/6WkG1Db9T-En4DWmNTTBdki5WTk\"",
+      "id": "The comment id that is used",
+      "snippet": {
+        "videoId": "the video id",
+        "topLevelComment": {
+          "kind": "youtube#comment",
+          "etag": "\"XpPGQXPnxQJhLgs6enD_n8JR4Qk/RUV3jLsQcA6PsDjkr3q5GkpAOmI\"",
+          "id": "comment id that is not used",
+          "snippet": {
+            "authorDisplayName": "Author name",
+            "authorProfileImageUrl": "example.com/photo.jpg",
+            "authorChannelUrl": "http://www.youtube.com/channel/someone",
+            "authorChannelId": {
+              "value": "someone"
+            },
+            "videoId": "some video id",
+            "textDisplay": "The text that is displayed",
+            "textOriginal": "text that is not shown",
+            "canRate": true,
+            "viewerRating": "none",
+            "likeCount": 4,
+            "disLikeCount": 2,
+            "publishedAt": "2017-11-02T19:25:12.000Z",
+            "updatedAt": "2017-11-02T19:25:12.000Z"
+          }
+        },
+        "canReply": true,
+        "totalReplyCount": 0,
+        "isPublic": true
+      }
+    }
+  ]
+}

@@ -1,12 +1,18 @@
-from googleapiclient.discovery import build as _build
 import getpass as _getpass
+import json as _json
+
+from googleapiclient.discovery import build as _build
+from googleapiclient.errors import HttpError
 
 
 def create_youtube_client(api_config_filename):
     youtube_api_service_name, youtube_api_version,developer_key = _get_api_config(api_config_filename)
     if developer_key is None:
         developer_key = _getpass.getpass("Google Developer Api key: ")
-    return _build(youtube_api_service_name, youtube_api_version, developerKey=developer_key)
+    try:
+        return _build(youtube_api_service_name, youtube_api_version, developerKey=developer_key)
+    except HttpError as e:
+        print(f"Failed to connect due to {_json.loads(e.content)['error']['errors'][0]['reason']}")
 
 
 def _get_api_config(api_config_filename):
