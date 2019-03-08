@@ -51,8 +51,8 @@ The next step are described here: [google api setup documentation](https://suppo
 
 #### Getting started
 To see an example of the complete pipeline check the `getting_started.ipynb`.  
-This notebook makes use of `tqdm` which generates some nice progress bars
-so you can track the progress.  
+This notebook makes use of `tqdm` which generates some nice progress bar so you can track the progress.  
+
 To enable these visualisations run:
 ```commandline
 (venv) $ jupyter nbextension enable --py widgetsnbextension
